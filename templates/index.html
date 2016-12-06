@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+
+
+{% block body %}
+
+<form action="{{ url_for('root') }}" method="POST">
+    <div class="row">
+    <form class="col s12">
+      <div class="row">
+          <h3>Put in your Twitter username:</h3>
+        <div class="input-field s12">
+          <input type="text" name="twitter_username" id="twitter_username" /><br>
+          <label for="twitter_username">Twitter username</label>
+          <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+           <i class="material-icons right">send</i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</form>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'main.html' %}
+
+
+{% block body %}
+<h3>Results for Twitter username @{{ username }}</h3>
+
+<div>
+    Negative: {{ result.neg }}<br>
+    Positive: {{ result.pos }}<br>
+    Neutral: {{ result.neut }}
+
+    <div class="ct-chart ct-perfect-fourth"></div>
+
+    <h4>Negative tweets</h4>
+    {% for tweet in result.negative_tweets %}
+        <li>{{ tweet }}</li>
+    {% endfor %}
+
+    <h4>Positive tweets</h4>
+    {% for tweet in result.positive_tweets %}
+        <li>{{ tweet }}</li>
+    {% endfor %}
+
+    <h4>Neutral tweets</h4>
+    {% for tweet in result.neutral_tweets %}
+        <li>{{ tweet }}</li>
+    {% endfor %}
+
+
+    <script>
+    var data = {
+      // A labels array that can contain any sort of values
+      labels: ['Negative', 'Positive', 'Neutral'],
+      // Our series array that contains series objects or in this case series data arrays
+      series: [
+        {{ result.neg }}, {{ result.pos }}, {{ result.neut }}
+      ]
+    };
+
+
+
+
+    // Create a new line chart object where as first parameter we pass in a selector
+    // that is resolving to our chart container element. The Second parameter
+    // is the actual data object.
+    // new Chartist.Line('.ct-chart', data);
+    var sum = function(a, b) { return a + b };
+    new Chartist.Pie('.ct-chart', data, {
+    //   labelInterpolationFnc: function(value) {
+    //     return Math.round(value / data.series.reduce(sum) * 100) + '%';
+    //   }
+    });
+
+    </script>
+</div>
+
+{% endblock %}
