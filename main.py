@@ -1,10 +1,11 @@
 from flask import Flask, render_template, abort, request
 import sys
 from twython import Twython
+import nltk
 from dictionary import Dictionary
 
-APP_KEY = '<INSERT APP_KEY>'
-APP_SECRET = '<INSERT APP SECRET>'
+APP_KEY = '<INSERT>'
+APP_SECRET = '<INSERT>'
 
 twitter = Twython(APP_KEY, APP_SECRET, oauth_version=2)
 ACCESS_TOKEN = twitter.obtain_access_token()
@@ -36,7 +37,8 @@ def sentiment(tweet):
     negative_score = 0
     positive_score = 0
 
-    tweet_words = tweet.split()
+    tokenizer = nltk.tokenize.TweetTokenizer()
+    tweet_words = tokenizer.tokenize(tweet)
 
     for word in tweet_words:
         negative_score += dictionaryN.check(word)
